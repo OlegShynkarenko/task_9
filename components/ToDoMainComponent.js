@@ -4,6 +4,13 @@ import { ToDoListComponent } from "./ToDoListComponent";
 export class ToDoMainComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
+    this.listStorage = [];
+  }
+
+  addItem(newItemValue) {
+    this.listStorage.push(newItemValue);
+    console.log(this.listStorage);
+    this.mount();
   }
 
   querySelectors() {
@@ -12,9 +19,12 @@ export class ToDoMainComponent {
   }
 
   mountChildren() {
-    this.listComponent = new ToDoListComponent(this.toDoList);
+    this.listComponent = new ToDoListComponent(this.toDoList, this.listStorage);
     this.listComponent.mount();
-    this.formComponent = new ToDoFormComponent(this.formContainer);
+    this.formComponent = new ToDoFormComponent(
+      this.formContainer,
+      this.addItem.bind(this)
+    );
     this.formComponent.mount();
   }
 
@@ -31,3 +41,23 @@ export class ToDoMainComponent {
     `;
   }
 }
+
+/*addEventListeners() {
+    this.formComponent.addButton.addEventListener('click', () => {
+      const newItemValue = this.formComponent.inputField.value;
+      const newItem = this.listComponent.toDoList.createElement('li');
+      newItem.innerText = newItemValue;
+      this.listComponent.toDoList.appendChild(newItem);
+    })
+  }*/
+
+/*addEventListeners() {
+  this.formComponent.addButton.addEventListener('click', this.handleAddItem());
+}
+
+handleAddItem() {
+  const newItemValue = this.formComponent.inputField.value;
+  const newItem = this.listComponent.toDoList.createElement('li');
+  newItem.innerText = newItemValue;
+  this.listComponent.toDoList.appendChild(newItem);
+}*/

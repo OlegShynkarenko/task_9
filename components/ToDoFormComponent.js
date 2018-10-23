@@ -1,7 +1,8 @@
 export class ToDoFormComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, addItem) {
     this.mountPoint = mountPoint;
-    this.listStorage = [];
+    this.addItem = addItem;
+    //this.listStorage = [];
   }
 
   querySelectors() {
@@ -15,8 +16,7 @@ export class ToDoFormComponent {
 
   handleAddItem() {
     const newItemValue = this.inputField.value;
-    this.listStorage.push(newItemValue);
-    console.log(this.listStorage);
+    this.addItem(newItemValue);
   }
 
   mount() {
@@ -34,23 +34,3 @@ export class ToDoFormComponent {
     `;
   }
 }
-
-/*addEventListeners() {
-    this.formComponent.addButton.addEventListener('click', () => {
-      const newItemValue = this.formComponent.inputField.value;
-      const newItem = this.listComponent.toDoList.createElement('li');
-      newItem.innerText = newItemValue;
-      this.listComponent.toDoList.appendChild(newItem);
-    })
-  }*/
-
-/*addEventListeners() {
-  this.formComponent.addButton.addEventListener('click', this.handleAddItem());
-}
-
-handleAddItem() {
-  const newItemValue = this.formComponent.inputField.value;
-  const newItem = this.listComponent.toDoList.createElement('li');
-  newItem.innerText = newItemValue;
-  this.listComponent.toDoList.appendChild(newItem);
-}*/

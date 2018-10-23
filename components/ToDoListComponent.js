@@ -1,20 +1,22 @@
-export class ToDoListComponent {
-  constructor(mountPoint) {
-    this.mountPoint = mountPoint;
-  }
+import _ from "lodash";
 
-  querySelectors() {
-    this.toDoList = this.mountPoint.querySelector(".to-do__list");
+export class ToDoListComponent {
+  constructor(mountPoint, listStorage) {
+    this.mountPoint = mountPoint;
+    this.listStorage = listStorage;
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
-    this.querySelectors();
   }
 
   render() {
     return `
-      <ol class="to-do__list"></ol>
-    `;
+      <ol class="to-do__list">
+          ${this.listStorage
+            .map(item => `<li class="list-item">${item}</li>`)
+            .join("")}      
+      </ol>
+`;
   }
 }
