@@ -6,17 +6,21 @@ export class ToDoListComponent {
     this.listStorage = listStorage;
   }
 
+  querySelectors() {
+    this.listContainer = this.mountPoint.querySelector(".to-do__list");
+    this.listStorage.forEach(i => {
+      this.listContainer.innerHTML += `<li>${i}</li>`;
+    });
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.querySelectors();
   }
 
   render() {
     return `
-      <ol class="to-do__list">
-          ${this.listStorage
-            .map(item => `<li class="list-item">${item}</li>`)
-            .join("")}      
-      </ol>
-`;
+      <ol class="to-do__list"></ol>
+  `;
   }
 }
